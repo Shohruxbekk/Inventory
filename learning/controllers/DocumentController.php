@@ -12,6 +12,7 @@ use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\rbac\Item;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class DocumentController extends Controller
 {
@@ -31,6 +32,9 @@ class DocumentController extends Controller
  }
  public function actionView($id) {
      $model = Document::findOne($id);
+     if(!$model){
+         throw new NotFoundHttpException('The requested page does not exist.');
+     }
      return $this->render('view', [
          'model' => $model,
      ]);
@@ -77,6 +81,9 @@ class DocumentController extends Controller
  }
  public function actionUpdate($id) {
  $model = Document::findOne($id);
+ if(!$model){
+     throw new NotFoundHttpException('The requested page does not exist.');
+ }
  $itemModel = $model->documentItems;
  if($model->load(Yii::$app->request->post())) {
      $data = Yii::$app->request->post('DocumentItem');
@@ -104,7 +111,7 @@ class DocumentController extends Controller
              }
              catch (\Exception $e) {
                  $transaction->rollBack();
-
+                  throw $e;
              }
          }
      }

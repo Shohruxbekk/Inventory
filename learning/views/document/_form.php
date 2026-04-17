@@ -25,6 +25,7 @@ use yii\widgets\ActiveForm;
 ]) ?>
 <?= MultipleInput::widget([
     'name' => "DocumentItem",
+    'value' => $itemModel,
     'addButtonOptions' => ['class' => 'btn btn-success','label' => '+'],
     'removeButtonOptions' => ['class' => 'btn btn-danger','label' => '-'],
     'columns' => [

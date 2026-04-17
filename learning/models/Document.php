@@ -19,7 +19,7 @@ class Document extends \yii\db\ActiveRecord
          [['title', 'type','status'], 'required'],
      ];
  }
- public function getDocumetItems(){
+ public function getDocumentItems(){
      return $this->hasMany(DocumentItem::className(), ['document_id' => 'id']);
  }
 }
